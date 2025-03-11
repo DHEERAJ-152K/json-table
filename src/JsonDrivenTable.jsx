@@ -8,7 +8,7 @@ const tableSchema = [
   { accessorKey: "name", header: "Name", type: "avatar" },
   { accessorKey: "age", header: "Age", enableSorting: true },
   { accessorKey: "status", header: "Status", type: "badge" },
-  { accessorKey: "role", header: "Role" },
+  { accessorKey: "role", header: "Role", enableFilter: true },
   { accessorKey: "email", header: "Email" },
   { accessorKey: "teams", header: "Teams", type: "badges" },
 ];
@@ -74,9 +74,22 @@ const JsonDrivenTable = () => {
           if (col.type === "badges")
             return (
               <Box display="flex" gap={1}>
-                {value.map((team, index) => (
-                  <Chip key={index} label={team} color="primary" size="small" sx={{ background: "rgba(0, 123, 255, 0.57)", color: "rgba(4, 5, 5, 0.91)"}} />
+                {value.slice(0, 4).map((team, index) => (
+                  <Chip
+                    key={index}
+                    label={team}
+                    color="primary"
+                    size="small"
+                    sx={{ background: "rgba(0, 123, 255, 0.57)", color: "rgba(4, 5, 5, 0.91)" }}
+                  />
                 ))}
+                {value.length > 3 && (
+                  <Chip
+                    label="5+"
+                    size="small"
+                    sx={{ backgroundColor: "rgba(206, 206, 206, 0.57) ", color: "black" }}
+                  />
+                )}
               </Box>
             );
           return value;
