@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { MaterialReactTable } from "material-react-table";
-import { Avatar, Chip, TextField, MenuItem, Select, Button, Box } from "@mui/material";
+import { Avatar, Chip, TextField, MenuItem, Select, Button, Box, Radio } from "@mui/material";
 import { debounce } from "lodash";
 import tableData from "./data";
 
@@ -47,15 +47,15 @@ const JsonDrivenTable = () => {
 
   const columns = useMemo(
     () =>
-      tableSchema.map((col) => ({
+    [
+      ...tableSchema.map((col) => ({
         accessorKey: col.accessorKey,
         header: col.header,
         enableColumnActions: false,
         enableSorting: col.enableSorting || false,
-        size: 130,
-        minSize: 100,
-        maxSize: 200,
-        flexGrow: 1,
+        size: "auto", 
+        minSize: 50, 
+        maxSize: 400,
         Cell: ({ cell }) => {
           const value = cell.getValue();
           if (col.type === "avatar") {
@@ -69,20 +69,36 @@ const JsonDrivenTable = () => {
               </Box>
             );
           }
-          if (col.type === "badge") return <Chip label={value} color="primary" size="small" />;
+          if (col.type === "badge")
+            return <Chip label={value} color="primary" size="small" sx={{ background: "rgba(0, 123, 255, 0.21)", color: "rgba(0, 123, 255, 0.78)", font: "bold" }} />;
           if (col.type === "badges")
             return (
               <Box display="flex" gap={1}>
                 {value.map((team, index) => (
-                  <Chip key={index} label={team} color="primary" size="small" />
+                  <Chip key={index} label={team} color="primary" size="small" sx={{ background: "rgba(0, 123, 255, 0.57)", color: "rgba(4, 5, 5, 0.91)"}} />
                 ))}
               </Box>
             );
           return value;
         },
       })),
+      {
+        accessorKey: "actions",
+        header: "",
+        enableColumnActions: false,
+        enableSorting: false,
+        size: 100,
+        Cell: () => (
+          <Box display="flex" alignItems="center" gap={1} justifyContent="center">
+            <Radio size="small" />
+            <Radio size="small" />
+          </Box>
+        ),
+      },
+    ],
     []
   );
+  
 
   return (
     <Box>
@@ -99,11 +115,14 @@ const JsonDrivenTable = () => {
           displayEmpty
           value={filters.role.length > 0 ? filters.role : ["All Roles"]}
           onChange={handleRoleFilterChange}
-          size="small"
-        >
-          <MenuItem disabled value="All Roles">All Roles</MenuItem>
+          size="small">
+          <MenuItem disabled value="All Roles">
+            All Roles
+          </MenuItem>
           {[...new Set(tableData.map((item) => item.role))].map((role) => (
-            <MenuItem key={role} value={role}>{role}</MenuItem>
+            <MenuItem key={role} value={role}>
+              {role}
+            </MenuItem>
           ))}
         </Select>
       </Box>
@@ -122,24 +141,38 @@ const JsonDrivenTable = () => {
 
       {/* pagination layout  */}
       <Box display="flex" justifyContent="space-between" alignItems="center" mt={2}>
-        <Button disabled={currentPage === 1} onClick={() => setCurrentPage((prev) => prev - 1)}>
+        <Button
+          color="neutral"
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage((prev) => prev - 1)}>
+          <Radio color="neutral" orientation="vertical" size="sm" variant="outlined" />
           Prev
         </Button>
-
         <Box display="flex" gap={1}>
           {Array.from({ length: totalPages }, (_, i) => (
             <Button
               key={i + 1}
-              variant={currentPage === i + 1 ? "contained" : "outlined"}
+              variant="soft"
               onClick={() => setCurrentPage(i + 1)}
-            >
+              sx={{
+                backgroundColor: currentPage === i + 1 ? "rgba(0, 123, 255, 0.1)" : "transparent", // Active button color
+                color: currentPage === i + 1 ? "blue" : "black", // Text color
+                border: "none",
+                "&:hover": {
+                  backgroundColor: "rgba(0, 123, 255, 0.1)",
+                },
+              }}>
               {i + 1}
             </Button>
           ))}
         </Box>
-        
-        <Button disabled={currentPage === totalPages} onClick={() => setCurrentPage((prev) => prev + 1)}>
+
+        <Button
+          color="neutral"
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage((prev) => prev + 1)}>
           Next
+          <Radio color="neutral" orientation="vertical" size="sm" variant="outlined" />
         </Button>
       </Box>
     </Box>
