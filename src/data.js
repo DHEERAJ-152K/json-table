@@ -5,7 +5,7 @@ const data = [
     "status": "Working",
     "role": "Software Engineer",
     "email": "alice@company.com",
-    "teams": ["Development", "Engineering", "AI", "Cloud"]
+    "teams": ["Development", "AI", "Cloud"]
   },
   {
     "name": { "username": "Bob", "handle": "@bob", "avatar": "https://i.pravatar.cc/40?img=2" },
@@ -13,7 +13,7 @@ const data = [
     "status": "Working",
     "role": "Data Scientist",
     "email": "bob@company.com",
-    "teams": ["AI", "Data", "Analytics", "Development"]
+    "teams": ["AI", "Data", "Development"]
   },
   {
     "name": { "username": "Charlie", "handle": "@charlie", "avatar": "https://i.pravatar.cc/40?img=3" },
@@ -21,7 +21,7 @@ const data = [
     "status": "Working",
     "role": "Product Manager",
     "email": "charlie@company.com",
-    "teams": ["Product", "Design", "UX", "Development"]
+    "teams": ["Product", "UX", "Development"]
   },
   {
     "name": { "username": "David", "handle": "@david", "avatar": "https://i.pravatar.cc/40?img=4" },
@@ -29,7 +29,7 @@ const data = [
     "status": "Working",
     "role": "Frontend Developer",
     "email": "david@company.com",
-    "teams": ["Frontend", "UI/UX", "Development", "Cloud"]
+    "teams": ["Frontend", "UI/UX", "Cloud"]
   },
   {
     "name": { "username": "Emma", "handle": "@emma", "avatar": "https://i.pravatar.cc/40?img=5" },
@@ -37,7 +37,7 @@ const data = [
     "status": "Working",
     "role": "Software Engineer",
     "email": "emma@company.com",
-    "teams": ["Backend", "Development", "Cloud", "Infrastructure"]
+    "teams": ["Backend", "Development", "Cloud"]
   },
   {
     "name": { "username": "Frank", "handle": "@frank", "avatar": "https://i.pravatar.cc/40?img=6" },
@@ -45,7 +45,7 @@ const data = [
     "status": "Working",
     "role": "Data Scientist",
     "email": "frank@company.com",
-    "teams": ["AI", "Data", "Security", "Analytics"]
+    "teams": ["AI", "Data", "Security"]
   },
   {
     "name": { "username": "Grace", "handle": "@grace", "avatar": "https://i.pravatar.cc/40?img=7" },
@@ -53,7 +53,7 @@ const data = [
     "status": "Working",
     "role": "Product Manager",
     "email": "grace@company.com",
-    "teams": ["Product", "UX", "Agile", "Cloud"]
+    "teams": ["Product", "UX", "Cloud"]
   },
   {
     "name": { "username": "Henry", "handle": "@henry", "avatar": "https://i.pravatar.cc/40?img=8" },
@@ -61,7 +61,7 @@ const data = [
     "status": "Working",
     "role": "Frontend Developer",
     "email": "henry@company.com",
-    "teams": ["UI/UX", "Design", "Frontend", "Development"]
+    "teams": ["UI/UX", "Design", "Frontend"]
   },
   {
     "name": { "username": "Isabel", "handle": "@isabel", "avatar": "https://i.pravatar.cc/40?img=9" },
@@ -69,7 +69,7 @@ const data = [
     "status": "Working",
     "role": "Software Engineer",
     "email": "isabel@company.com",
-    "teams": ["Backend", "Cloud", "Infrastructure", "Security"]
+    "teams": ["Backend", "Cloud", "Security"]
   },
   {
     "name": { "username": "Jack", "handle": "@jack", "avatar": "https://i.pravatar.cc/40?img=10" },
@@ -77,7 +77,7 @@ const data = [
     "status": "Working",
     "role": "Data Scientist",
     "email": "jack@company.com",
-    "teams": ["AI", "Data", "Analytics", "Machine Learning"]
+    "teams": ["AI", "Data", "Analytics"]
   },
   {
     "name": { "username": "Kate", "handle": "@kate", "avatar": "https://i.pravatar.cc/40?img=11" },
@@ -85,7 +85,7 @@ const data = [
     "status": "Working",
     "role": "Product Manager",
     "email": "kate@company.com",
-    "teams": ["Product", "Agile", "UX", "Design"]
+    "teams": ["Product", "Agile", "Design"]
   },
   {
     "name": { "username": "Leo", "handle": "@leo", "avatar": "https://i.pravatar.cc/40?img=12" },
@@ -93,7 +93,7 @@ const data = [
     "status": "Working",
     "role": "Frontend Developer",
     "email": "leo@company.com",
-    "teams": ["Frontend", "UI/UX", "Cloud", "Development"]
+    "teams": ["Frontend", "UI/UX", "Cloud"]
   },
   {
     "name": { "username": "Mia", "handle": "@mia", "avatar": "https://i.pravatar.cc/40?img=13" },
@@ -101,7 +101,7 @@ const data = [
     "status": "Working",
     "role": "Software Engineer",
     "email": "mia@company.com",
-    "teams": ["Backend", "Development", "Infrastructure", "Security"]
+    "teams": ["Backend", "Development", "Security"]
   },
   {
     "name": { "username": "Noah", "handle": "@noah", "avatar": "https://i.pravatar.cc/40?img=14" },
@@ -109,7 +109,7 @@ const data = [
     "status": "Working",
     "role": "Data Scientist",
     "email": "noah@company.com",
-    "teams": ["AI", "Analytics", "Machine Learning", "Security"]
+    "teams": ["AI", "Analytics", "Security"]
   },
   {
     "name": { "username": "Olivia", "handle": "@olivia", "avatar": "https://i.pravatar.cc/40?img=15" },
@@ -117,7 +117,7 @@ const data = [
     "status": "Working",
     "role": "Backend Developer",
     "email": "olivia@company.com",
-    "teams": ["Backend", "Data", "Security", "Development"]
+    "teams": ["Backend", "Data", "Security",]
   },
   {
     "name": { "username": "Paul", "handle": "@paul", "avatar": "https://i.pravatar.cc/40?img=16" },
@@ -125,7 +125,7 @@ const data = [
     "status": "Working",
     "role": "Frontend Developer",
     "email": "paul@company.com",
-    "teams": ["Frontend", "Development", "UI/UX", "Cloud"]
+    "teams": ["Frontend", "UI/UX", "Cloud"]
   },
   {
     "name": { "username": "Quinn", "handle": "@quinn", "avatar": "https://i.pravatar.cc/40?img=17" },
@@ -133,7 +133,7 @@ const data = [
     "status": "Working",
     "role": "Software Engineer",
     "email": "quinn@company.com",
-    "teams": ["Development", "Cloud", "Infrastructure", "AI"]
+    "teams": ["Development", "Cloud", "AI"]
   },
   {
     "name": { "username": "Rachel", "handle": "@rachel", "avatar": "https://i.pravatar.cc/40?img=18" },
@@ -141,7 +141,7 @@ const data = [
     "status": "Working",
     "role": "Backend Developer",
     "email": "rachel@company.com",
-    "teams": ["Backend", "Security", "Infrastructure", "Development"]
+    "teams": ["Backend", "Security", "Development"]
   },
   {
     "name": { "username": "Steve", "handle": "@steve", "avatar": "https://i.pravatar.cc/40?img=19" },
@@ -149,7 +149,7 @@ const data = [
     "status": "Working",
     "role": "Product Manager",
     "email": "steve@company.com",
-    "teams": ["Product", "UX", "Design", "Agile"]
+    "teams": ["Product", "UX", "Agile"]
   },
   {
     "name": { "username": "Tina", "handle": "@tina", "avatar": "https://i.pravatar.cc/40?img=20" },
@@ -157,7 +157,7 @@ const data = [
     "status": "Working",
     "role": "Backend Developer",
     "email": "tina@company.com",
-    "teams": ["Backend", "Development", "Security", "Infrastructure"]
+    "teams": ["Backend", "Development", "Security"]
   }
 ]
 

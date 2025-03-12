@@ -4,6 +4,7 @@ import { Avatar, Chip, TextField, MenuItem, Select, Button, Box, Radio } from "@
 import { debounce } from "lodash";
 import tableData from "./data";
 
+//schema for table (rows and colums)
 const tableSchema = [
   { accessorKey: "name", header: "Name", type: "avatar" },
   { accessorKey: "age", header: "Age", enableSorting: true },
@@ -13,12 +14,13 @@ const tableSchema = [
   { accessorKey: "teams", header: "Teams", type: "badges" },
 ];
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 8;
 
 const JsonDrivenTable = () => {
   const [filters, setFilters] = useState({ name: "", role: [] });
   const [currentPage, setCurrentPage] = useState(1);
 
+  //debouncer for handling name filter
   const handleNameFilterChange = debounce((value) => {
     setFilters((prev) => ({ ...prev, name: value }));
     setCurrentPage(1);
@@ -36,6 +38,7 @@ const JsonDrivenTable = () => {
       .filter((row) => filters.role.length === 0 || filters.role.includes(row.role));
   }, [filters]);
 
+  //pagination logic
   const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
   const displayedData = filteredData.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -43,17 +46,35 @@ const JsonDrivenTable = () => {
   );
 
   const columns = useMemo(
-    () =>
-    [
+    () => [
       ...tableSchema.map((col) => ({
         accessorKey: col.accessorKey,
         header: col.header,
         enableColumnActions: false,
         enableSorting: col.enableSorting || false,
-        size: "auto", 
-        minSize: 50, 
-        maxSize: 400,
-        muiTableHeadCellProps: { sx: { fontWeight: "normal"} },
+        size:
+          col.accessorKey === "age"
+            ? "auto"
+            : col.accessorKey === "status"
+            ? 80
+            : col.accessorKey === "role"
+            ? 150
+            : col.accessorKey === "email"
+            ? 200
+            : col.accessorKey === "teams"
+            ? 180
+            : "auto",
+        muiTableHeadCellProps: {
+          sx: {
+            fontWeight: "normal",
+            padding: "16px",
+          },
+        },
+        muiTableBodyCellProps: {
+          sx: {
+            padding: "16px",
+          },
+        },
         Cell: ({ cell }) => {
           const value = cell.getValue();
           if (col.type === "avatar") {
@@ -68,7 +89,18 @@ const JsonDrivenTable = () => {
             );
           }
           if (col.type === "badge")
-            return <Chip label={value} color="primary" size="small" sx={{ background: "rgba(0, 123, 255, 0.21)", color: "rgba(0, 123, 255, 0.78)", fontWeight:"bold" }} />;
+            return (
+              <Chip
+                label={value}
+                color="primary"
+                size="small"
+                sx={{
+                  background: "rgba(0, 123, 255, 0.21)",
+                  color: "rgba(0, 123, 255, 0.78)",
+                  fontWeight: "bold",
+                }}
+              />
+            );
           if (col.type === "badges")
             return (
               <Box display="flex" gap={1}>
@@ -81,11 +113,11 @@ const JsonDrivenTable = () => {
                     sx={{ background: "rgba(0, 123, 255, 0.57)", color: "rgba(4, 5, 5, 0.91)" }}
                   />
                 ))}
-                {value.length > 3 && (
+                {value.length > 2 && (
                   <Chip
                     label="5+"
                     size="small"
-                    sx={{ backgroundColor: "rgba(206, 206, 206, 0.57) ", color: "black" }}
+                    sx={{ backgroundColor: "rgba(206, 206, 206, 0.57)", color: "black" }}
                   />
                 )}
               </Box>
@@ -98,9 +130,15 @@ const JsonDrivenTable = () => {
         header: "",
         enableColumnActions: false,
         enableSorting: false,
-        size: 100,
+        size: 50,
+        muiTableBodyCellProps: {
+          sx: {
+            textAlign: "center",
+            padding: "0px",
+          },
+        },
         Cell: () => (
-          <Box display="flex" alignItems="center" gap={1} justifyContent="center">
+          <Box display="flex" alignItems="center">
             <Radio size="small" />
             <Radio size="small" />
           </Box>
@@ -109,19 +147,20 @@ const JsonDrivenTable = () => {
     ],
     []
   );
-
   return (
     <Box>
+      {/* filters  */}
       <Box display="flex" gap={2} mb={2}>
         <TextField
           label="Filter by Name"
           variant="outlined"
           size="small"
-          sx={{"& .MuiInputBase-input::placeholder": {
-      fontSize: "1px", 
-      opacity: 1, 
-    }, }} 
-          
+          sx={{
+            "& .MuiInputBase-input::placeholder": {
+              fontSize: "14px",
+              opacity: 1,
+            },
+          }}
           onChange={(e) => handleNameFilterChange(e.target.value)}
         />
         <Select
@@ -130,18 +169,19 @@ const JsonDrivenTable = () => {
           value={filters.role.length > 0 ? filters.role : ["All Roles"]}
           onChange={handleRoleFilterChange}
           size="small"
-          sx={{fontSize:'12px'}}>
-          <MenuItem disabled value="All Roles"  sx={{fontSize:'12px'}}>
+          sx={{ fontSize: "14px" }}>
+          <MenuItem disabled value="All Roles" sx={{ fontSize: "14px" }}>
             All Roles
           </MenuItem>
           {[...new Set(tableData.map((item) => item.role))].map((role) => (
-            <MenuItem key={role} value={role}  sx={{fontSize:'12px'}}>
+            <MenuItem key={role} value={role} sx={{ fontSize: "14px" }}>
               {role}
             </MenuItem>
           ))}
         </Select>
       </Box>
 
+      {/* table contet  */}
       <MaterialReactTable
         columns={columns}
         data={displayedData}
@@ -150,9 +190,15 @@ const JsonDrivenTable = () => {
         enablePagination={false}
         enableToolbarInternalActions={false}
         enableTopToolbar={false}
-        muiTableContainerProps={{ sx: { maxWidth: "100%", overflowX: "auto" } }}
+        muiTableHeadRowProps={{
+          sx: { backgroundColor: "rgb(237, 237, 237)" },
+        }}
+        muiTableContainerRowProps={{
+          sx: { maxWidth: "100%", overflowX: "auto", minHeight: "auto", height: "auto" },
+        }}
       />
 
+      {/* pagination and buttons  */}
       <Box display="flex" justifyContent="space-between" alignItems="center" mt={2}>
         <Button
           color="neutral"
@@ -161,7 +207,7 @@ const JsonDrivenTable = () => {
           <Radio color="neutral" orientation="vertical" size="sm" variant="outlined" />
           Prev
         </Button>
-        <Box display="flex" gap={1}>
+        <Box display="flex" gap={2}>
           {Array.from({ length: totalPages }, (_, i) => (
             <Button
               key={i + 1}
